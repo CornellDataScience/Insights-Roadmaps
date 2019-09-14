@@ -1,4 +1,4 @@
 # Roadmaps
 
-*Members: Kathy Byun, Ruchika Dongre, Ziwei Gu, Tushar Khan, William Bekerman*
+*Members: Ziwei Gu, Tushar Khan, Kathy Byun, Ruchika Dongre, William Bekerman
 
