@@ -50,11 +50,16 @@ rect = plt.Rectangle(box.bounds[::2],
                      ec='none', lw=2, fc='none')
 ax.add_patch(rect)
 
+x = (0,1)
+y = (0,1)
+line, = ax.plot(x, y)
+
 def init():
     global box, rect
     particles.set_data([], [])
     rect.set_edgecolor('none')
-    return particles, rect
+    line.set_ydata([np.nan] * len(x))
+    return particles, rect, line
 
 def animate(i):
     global box, rect, dt, ax, fig
@@ -63,7 +68,10 @@ def animate(i):
     rect.set_edgecolor('k')
     particles.set_data(box.state[:, 0], box.state[:, 1])
     particles.set_markersize(8)
-    return particles, rect
+
+    line.set_ydata(y)
+
+    return particles, rect, line
 
 ani = animation.FuncAnimation(fig, animate, frames=600,
                               interval=10, blit=True, init_func=init)
