@@ -1,4 +1,5 @@
 import random
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -8,11 +9,11 @@ from models import RoadMap, Roads, Lights
 roads = pd.read_csv('fake_data.csv')
 init_state = []
 NUM_CARS = 20
-for _ in range(NUM_CARS):
+#for _ in range(NUM_CARS):
     # print(roads.iloc[0]['Start'])
 
 # [x, y, vx, vy]
-init_state =[[0,1,1,0], [1,1,0,1], [1,1,-1,0],[-1,-1,1,0],[-2,-1,0,1]]
+init_state = [[0,1,1,0], [1,1,0,1], [1,1,-1,0],[-1,-1,1,0],[-2,-1,0,1]]
 
 city = RoadMap(init_state, size=0.04)
 dt = 1. / 50
@@ -39,23 +40,21 @@ def init():
     cars.set_data([], [])
     rect.set_edgecolor('none')
     line.set_ydata([np.nan] * len(x))
-    return particles, rect, line
-    return cars, rect
+    return cars, rect, line
 
 def animate(i):
     global city, rect, dt, ax, fig
     city.step(dt)
     
     rect.set_edgecolor('k')
-    particles.set_data(box.state[:, 0], box.state[:, 1])
-    particles.set_markersize(8)
+    #particles.set_data(box.state[:, 0], box.state[:, 1])
+    #particles.set_markersize(8)
 
     line.set_ydata(y)
 
-    return particles, rect, line
     cars.set_data(city.state[:, 0], city.state[:, 1])
     cars.set_markersize(8)
-    return cars, rect
+    return cars, rect, line
 
 ani = animation.FuncAnimation(fig, animate, frames=600,
                               interval=10, blit=True, init_func=init)
