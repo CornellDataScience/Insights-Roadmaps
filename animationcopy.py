@@ -7,6 +7,7 @@ import csv
 
 from models import RoadMap, Roads, Lights
 
+#data
 roads = pd.read_csv('fake_data.csv')
 init_state = []
 NUM_CARS = 20
@@ -36,7 +37,6 @@ plt.scatter(roads['stopx'], roads['stopy'], color='g')
 plt.scatter(roads['startx'], roads['starty'], color='b')
 
 ax.add_patch(rect)
-
 x = (0,1)
 y = (0,1)
 line, = ax.plot(x, y)

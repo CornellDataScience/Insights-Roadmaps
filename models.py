@@ -3,7 +3,8 @@ import numpy as np
 class RoadMap:
     def __init__(self,
                  init_state,
-                 bounds = [-2, 2, -2, 2],
+                 bounds = [-10, 10, -10, 10],
+                 #bounds = [-2, 2, -2, 2],
                  size = 0.04):
         self.init_state = np.asarray(init_state, dtype=float)
         self.size = size
