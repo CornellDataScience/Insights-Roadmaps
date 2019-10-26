@@ -7,6 +7,7 @@ import csv
 
 from models import RoadMap, Roads, Lights
 
+#data
 roads = pd.read_csv('fake_data.csv')
 init_state = []
 NUM_CARS = 20
@@ -36,22 +37,16 @@ plt.scatter(roads['stopx'], roads['stopy'], color='g')
 plt.scatter(roads['startx'], roads['starty'], color='b')
 
 ax.add_patch(rect)
-
-x = [(0,1), (0,0)]
-y = [(1,1), (1,0)]
-
-lines = []
-for i in range(len(x)):
-    hello, = ax.plot(x[i], y[i])
-    lines.append(hello)
+x = (0,1)
+y = (0,1)
+line, = ax.plot(x, y)
 
 def init():
     global city, rect
     cars.set_data([], [])
     rect.set_edgecolor('none')
-    for line in lines:
-        line.set_ydata([np.nan] * len(x[1]))
-    return cars, rect, lines[0], lines[1]
+    line.set_ydata([np.nan] * len(x))
+    return cars, rect, line
 
 def animate(i):
     global city, rect, dt, ax, fig
@@ -60,14 +55,12 @@ def animate(i):
     rect.set_edgecolor('k')
     #particles.set_data(box.state[:, 0], box.state[:, 1])
     #particles.set_markersize(8)
-    idx = 0
-    for line in lines:
-        line.set_ydata(y[idx])
-        idx = idx+1
+
+    line.set_ydata(y)
 
     cars.set_data(city.state[:, 0], city.state[:, 1])
     cars.set_markersize(8)
-    return cars, rect, lines[0], lines[1]
+    return cars, rect, line
 
 ani = animation.FuncAnimation(fig, animate, frames=600,
                               interval=10, blit=True, init_func=init)
