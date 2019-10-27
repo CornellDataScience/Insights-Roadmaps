@@ -16,6 +16,6 @@ class Node:
         if edge not in self.out_edges:
             self.out_edges.append(edge)
 
-    def get_output_edges(self, edge) -> list:
+    def get_output_edges(self) -> list:
         """Returns a list of edges a vehicle can take from this node"""
         return self.out_edges

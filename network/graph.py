@@ -2,6 +2,10 @@
 from node import Node
 from edge import Edge
 
+class PathNode(Node):
+
+    pass
+
 class Graph:
 
     def __init__(self, nodes=[], edges=[]):
@@ -10,6 +14,12 @@ class Graph:
         Representation Invariant: There are no duplicate nodes or edges."""
         self.nodes = nodes
         self.edges = edges
+
+    def get_nodes(self) -> list:
+        return self.nodes
+
+    def get_edges(self) -> list:
+        return self.edges
 
     def add_edge(self, edge:Edge):
         """Adds `edge` and its associated node endpoints to the existing network"""
@@ -25,4 +35,8 @@ class Graph:
     def get_shortest_path(self, start: Node, end: Node) -> list:
         """Returns a list of edges that constitutes the shortest path from `start` to `end`"""
         pass
+
+        
+
+
 
