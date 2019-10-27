@@ -1,10 +1,15 @@
 
-from node import Node
-from edge import Edge
+from network.node import Node
+from network.edge import Edge
 
 class PathNode(Node):
 
-    pass
+    def __init__(self, node: Node, parent: PathNode):
+        self.node = node
+        self.parent = parent
+
+    def backtrack(self):
+        return self.parent
 
 class Graph:
 
@@ -34,7 +39,12 @@ class Graph:
 
     def get_shortest_path(self, start: Node, end: Node) -> list:
         """Returns a list of edges that constitutes the shortest path from `start` to `end`"""
-        pass
+        
+        frontier_edges = start.get_output_edges()
+        frontier_nodes = []
+        for edge in frontier_edges:
+            node = PathNode(edge.get_destination(), start)
+            frontier_nodes.append(node)
 
         
 
