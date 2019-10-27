@@ -1,5 +1,5 @@
 
-from network.node import Node
+from node import Node
 
 class Edge:
     """Represents a road in the network that a car must traverse in its entirety."""
