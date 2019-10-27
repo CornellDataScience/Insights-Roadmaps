@@ -12,6 +12,7 @@ class RoadMap:
         self.time_elapsed = 0
         self.bounds = bounds
 
+
     def step(self, dt):
         self.time_elapsed += dt
         self.state[:, :2] += dt * self.state[:, 2:]
@@ -44,3 +45,15 @@ class Lights:
         self.y = y
         self.red_duration = red_duration
         self.green_duration = green_duration
+
+        #change color of traffic lights
+        red_duration = 5
+        green_duration = 10
+
+        counter = 0
+        self.time_elapsed += dt
+        counter +=dt
+        if counter <=green_duration:
+            color = 'green'
+        if counter >green_duration:
+            color = 'red'

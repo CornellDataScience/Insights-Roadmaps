@@ -31,9 +31,27 @@ rect = plt.Rectangle(city.bounds[::2],
                      city.bounds[3] - city.bounds[2],
                      ec='none', lw=2, fc='none')
 
-#plot nodes from csv file
-plt.scatter(roads['stopx'], roads['stopy'], color='g')
-plt.scatter(roads['startx'], roads['starty'], color='b')
+#plot nodes from csv file, traffic Lights
+
+
+#colormap = np.array(['r', 'g', 'b'])
+#categories = np.array([0, 2, 1, 1, 1, 2, 0, 0])
+
+"""
+t = np.linspace(0, 2 * np.pi, 15)
+x = np.sin(t)
+y = np.cos(t)
+"""
+
+
+
+
+plt.scatter(roads['stopx'], roads['stopy'], c='r')
+#plt.scatter(roads['startx'], roads['starty'], s=100, c=y)
+
+plt.scatter(roads['startx'], roads['starty'], s=100, c=color)
+
+
 
 ax.add_patch(rect)
 
