@@ -1,10 +1,10 @@
 
 class Edge:
 
-    def __init__(self, weight: int):
+    def __init__(self, weight=1):
         self.weight = weight
 
-    def get_weight(self) -> float:
+    def get_weight(self):
         return self.weight
 
 

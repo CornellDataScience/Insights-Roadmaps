@@ -1,6 +1,6 @@
 
-from network.edge import Edge
-from network.node import Node
+from .edge import Edge
+from .node import Node
 
 class Graph:
 
@@ -56,3 +56,6 @@ class Graph:
                     frontier_nodes.insert(i, (neighbor, neighbor_score))
 
         return None
+
+    def connect(self, start: Node, end: Node, edge: Edge):
+        return start.connect_to(end, edge)
