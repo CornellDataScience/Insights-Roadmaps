@@ -31,21 +31,21 @@
           strokeColor: '#393'
         };
         var line = new google.maps.Polyline({
-          path: [{lat: 42.436483, lng: -76.507386}, {lat: 42.438501, lng: -76.464116}, {lat: 42.447367, lng: -76.470143}],
+          path: JSON.parse('{{ cars | tojson | safe}}').car1,//[{lat: 42.436483, lng: -76.507386}, {lat: 42.438501, lng: -76.464116}, {lat: 42.447367, lng: -76.470143}],
           icons: [{
             icon: lineSymbol,
             offset: '100%'
           }],
           map: map
         });
-        var line2 = new google.maps.Polyline({
+        /*var line2 = new google.maps.Polyline({
           path: [{lat: 42.440498, lng: -76.495697}, {lat: 42.442137, lng: -76.485450}, {lat: 42.442138, lng: -76.485450}],
           icons: [{
             icon: lineSymbol,
             offset: '100%'
           }],
           map: map
-        });
+        });*/
         //car object contains:
         //speed
         //coordinates @ speed
@@ -54,18 +54,17 @@
         //if coordinates are sa
 
         animateCircle(line);
-        animateCircle(line2);
+        //animateCircle(line2);
       }
 
       function animateCircle(line) {
           var count = 0;
           window.setInterval(function() {
-            if (count != 199) {
             count = (count + 1) % 200;
 
             var icons = line.get('icons');
             icons[0].offset = (count / 2) + '%';
-            line.set('icons', icons);}
+            line.set('icons', icons);
         }, 30);
       }
     </script>

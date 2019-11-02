@@ -14,7 +14,7 @@ class Graph:
 
     def get_path(self, start: Node, end: Node) -> list:
         """Returns a list of nodes that constitute the optimal path from `start` to `end`. Returns None if a path does not exist. """
-        
+
         if (start, end) in self.computed_paths.keys():
             return self.computed_paths[(start, end)]
 
@@ -56,3 +56,6 @@ class Graph:
                     frontier_nodes.insert(i, (neighbor, neighbor_score))
 
         return None
+
+
+#{'Car1': {'coordinates': [(5, 6), (7, 8)], 'speed': 2}}
