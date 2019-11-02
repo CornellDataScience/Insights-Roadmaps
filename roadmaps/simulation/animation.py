@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import csv
 
-from models import RoadMap, Roads, Lights
+from roadmaps.simulation.models import RoadMap, Roads, Lights
 
 roads = pd.read_csv('fake_data.csv')
 init_state = []
