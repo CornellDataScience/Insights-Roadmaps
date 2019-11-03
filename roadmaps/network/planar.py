@@ -1,8 +1,8 @@
-from .edge import Edge
-from .node import Node
-from .graph import Graph
+from .graph import Edge, Node, Graph
+
 import math
 import sys
+
 class PlanarEdge(Edge):
 
     def __init__(self, start_coordinates: tuple, end_coordinates: tuple):
@@ -43,3 +43,4 @@ class PlanarGraph(Graph):
 
     def connect(self, start: PlanarNode, end: PlanarNode):
         return start.connect_to(end)
+        
