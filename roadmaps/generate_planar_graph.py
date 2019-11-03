@@ -35,9 +35,12 @@ def getPlanarGraph():
             i += 1
         a.connect_to(b)
 
-    planarGraphResult = PlanarGraph(nodes)
+    # A PlanarGraph object that represents the traffic network
+    return PlanarGraph(nodes)
+
+def getPlanarGraphAsDict():
+    planarGraphResult = getPlanarGraph()
     dict = {'car1': []}
     for node in planarGraphResult.nodes:
         dict['car1'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
-    # A PlanarGraph object that represents the traffic network
     return dict
