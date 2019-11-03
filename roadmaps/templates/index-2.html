@@ -21,11 +21,9 @@
       function pickHex(color1, color2, weight) {
         var w1 = weight*100; // this is some crappy normalization
         var w2 = 1 - w1;
-        console.log(w1);
         var rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
             Math.round(color1[1] * w1 + color2[1] * w2),
             Math.round(color1[2] * w1 + color2[2] * w2)];
-            console.log(rgb);
         return 'rgb(' + rgb.join(', ') + ')';
       }
       function initMap() {
@@ -54,6 +52,23 @@
             map: map
           }));
         }
+        for (k = 0; k < lines.length; k++) {
+          setWeight(lines[k], weights[k]);
+        }
+
+        function setWeight(marker, secretMessage) {
+        var infoWindow = new google.maps.InfoWindow({
+          content: secretMessage.toString()
+        });
+
+        google.maps.event.addListener(lines[k], 'mouseover', function(e) {
+         infoWindow.setPosition(e.latLng);
+         infoWindow.open(map);
+      });
+      google.maps.event.addListener(lines[k], 'mouseout', function() {
+         infoWindow.close();
+      });
+      }
         /*var lineSymbol = {
           path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
           scale: 8,
