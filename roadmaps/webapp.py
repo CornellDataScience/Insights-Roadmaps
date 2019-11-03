@@ -1,7 +1,4 @@
 from flask import Flask, render_template
-from network.edge import Edge
-from network.node import Node
-from network.graph import Graph
 import sys
 import generate_planar_graph
 
