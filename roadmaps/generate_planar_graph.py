@@ -40,7 +40,18 @@ def getPlanarGraph():
 
 def getPlanarGraphAsDict():
     planarGraphResult = getPlanarGraph()
-    dict = {'car1': []}
+    dict = {'car1': [], 'car1edges': [], 'car1weights': []}
+    #need new dict for lines -
     for node in planarGraphResult.nodes:
         dict['car1'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
+        neighbors = node.get_neighbors()
+        for neighbor_node in neighbors:
+            dict['car1edges'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
+            dict['car1edges'].append({'lat': neighbor_node.coordinates[0], 'lng': neighbor_node.coordinates[1]})
+            dict['car1weights'].append(node.get_cost(neighbor_node))
+        '''for j in range(len)
+        if (i == len(planarGraphResult.nodes) - 1):
+            dict['car1weights'].append(planarGraphResult.nodes[i].get_cost(planarGraphResult.nodes[0]))
+        else:
+            dict['car1weights'].append(planarGraphResult.nodes[i].get_cost(planarGraphResult.nodes[i+1]))'''
     return dict
