@@ -1,5 +1,5 @@
 
-""" Represents ta Base """
+"""Represents a base network module"""
 
 class Edge:
 

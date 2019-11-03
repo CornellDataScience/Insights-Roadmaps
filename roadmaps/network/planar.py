@@ -1,5 +1,7 @@
-
 from .graph import Edge, Node, Graph
+
+import math
+import sys
 
 class PlanarEdge(Edge):
 
@@ -8,7 +10,11 @@ class PlanarEdge(Edge):
         self.end = end_coordinates
 
     def get_weight(self):
-        return 1
+        #print(self.start[0], file=sys.stderr)
+        #return 1
+        weight = math.sqrt((self.end[0] - self.start[0])**2 + (self.end[1] - self.start[1])**2)
+        print(weight, file = sys.stderr)
+        return weight
         # TODO: fix
         # return sum([((x1 - x2) ** 2) for x1, x2 in zip(list(self.start), list(self.end))])
 
@@ -29,7 +35,7 @@ class PlanarNode(Node):
         return self.coordinates
 
     def connect_to(self, node):
-        edge = PlanarEdge(self.get_coordinates, node.get_coordinates)
+        edge = PlanarEdge(self.get_coordinates(), node.get_coordinates())
         super().connect_to(node, edge)
 
 
@@ -37,3 +43,4 @@ class PlanarGraph(Graph):
 
     def connect(self, start: PlanarNode, end: PlanarNode):
         return start.connect_to(end)
+        
