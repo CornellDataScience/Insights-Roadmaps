@@ -1,7 +1,5 @@
 
-from .edge import Edge
-from .node import Node
-from .graph import Graph
+from .graph import Edge, Node, Graph
 
 class PlanarEdge(Edge):
 

@@ -35,6 +35,20 @@ if __name__ == '__main__':
     # A Graph object that represents the traffic network
     network = Graph(nodes)
     
-    start, end = nodes[0], choice(nodes)
-    path = network.get_path(start, end)
-    print(path)
+
+
+    # This should go in a test file
+    from time import time_ns as now
+
+    t = now()
+    paths = []
+    for i in range(250000):
+        start, end = nodes[0], choice(nodes)
+        path = network.get_path(start, end)
+        paths.append(path)
+    t = (now() - t) * 10 ** -9
+    
+    for key in network.computed_paths.keys():
+        assert network.computed_paths[key] in paths
+
+    print(round(t, 3), "seconds;", len(paths),'operations;', len(paths) - len(set([''.join(str(x)) for x in paths])), 'duplicates;', len(network.computed_paths.keys()), 'cached')
