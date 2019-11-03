@@ -22,10 +22,21 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 42.440498, lng: -76.495697},
-          zoom: 15,
+          zoom: 10,
         });
+        var locations = JSON.parse('{{ cars | tojson | safe}}').car1;
+        var markers = []
+        var image = "https://i.imgur.com/SZgQKcB.png";
+        for(i = 0; i < locations.length; i++){
+          markers.push(new google.maps.Marker({
+             position: locations[i],
+             map: map,
+             icon: image
+          }));
+        }
 
-        var lineSymbol = {
+
+        /*var lineSymbol = {
           path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
           scale: 8,
           strokeColor: '#393'
@@ -37,7 +48,7 @@
             offset: '100%'
           }],
           map: map
-        });
+        });*/
         /*var line2 = new google.maps.Polyline({
           path: [{lat: 42.440498, lng: -76.495697}, {lat: 42.442137, lng: -76.485450}, {lat: 42.442138, lng: -76.485450}],
           icons: [{

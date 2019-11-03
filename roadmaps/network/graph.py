@@ -1,6 +1,6 @@
 
-from network.edge import Edge
-from network.node import Node
+from .edge import Edge
+from .node import Node
 
 class Graph:
 
@@ -57,5 +57,5 @@ class Graph:
 
         return None
 
-
-#{'Car1': {'coordinates': [(5, 6), (7, 8)], 'speed': 2}}
+    def connect(self, start: Node, end: Node, edge: Edge):
+        return start.connect_to(end, edge)

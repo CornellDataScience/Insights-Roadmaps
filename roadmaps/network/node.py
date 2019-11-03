@@ -1,5 +1,5 @@
 
-from network.edge import Edge
+from .edge import Edge
 
 class Node:
 
