@@ -18,6 +18,7 @@
   <body>
     <div id="map"></div>
     <script>
+    setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
       function pickHex(color1, color2, weight) {
         var w1 = weight*100; // this is some crappy normalization
         var w2 = 1 - w1;
