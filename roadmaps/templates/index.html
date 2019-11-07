@@ -60,13 +60,19 @@
         var infoWindow = new google.maps.InfoWindow({
           content: secretMessage.toString()
         });
+        var oldWeight = marker.strokeWeight;
 
         google.maps.event.addListener(lines[k], 'mouseover', function(e) {
          infoWindow.setPosition(e.latLng);
          infoWindow.open(map);
+         marker.setOptions({strokeWeight: 8});
+         //marker.strokeColor = 'rgb(' + [0,0,0].join(', ') + ')';
+         //console.log(marker.color);
       });
       google.maps.event.addListener(lines[k], 'mouseout', function() {
          infoWindow.close();
+         marker.setOptions({strokeWeight: oldWeight});
+         //marker.color = old_color;
       });
       }
         /*var lineSymbol = {
