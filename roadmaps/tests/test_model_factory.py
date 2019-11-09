@@ -7,7 +7,7 @@ from time import time_ns as now
 from model.graph import Edge, Node, Graph
 from model import factory
 
-class TestGraph(unittest.TestCase):
+class TestFactory(unittest.TestCase):
 
     def test_random_graph(self):
         nodes, edges, max_weight = 100, 200, 10

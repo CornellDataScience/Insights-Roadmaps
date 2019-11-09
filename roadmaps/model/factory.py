@@ -20,7 +20,7 @@ def random_graph(n: int, v: int, max_edge_weight: int = 10, directed: bool = Tru
     # Add random connections
     missing_connections = [(n1, n2) for n1 in nodes for n2 in list(set(nodes) - set(n1.get_neighbors()))]
     for i in range(v - (n - 1)):
-        a, b = missing_connections.pop(randint(0, len(missing_connections)))
+        a, b = missing_connections.pop(randint(0, len(missing_connections)-1))
         weight = randint(0, max_edge_weight) 
         a.connect_to(b, Edge(weight))
         if not directed:

@@ -30,7 +30,7 @@ class TestGraph(unittest.TestCase):
         # Add random connections
         missing_connections = [(n1, n2) for n1 in self.nodes for n2 in list(set(self.nodes) - set(n1.get_neighbors()))]
         for i in range(num_edges - (num_nodes - 1)):
-            a, b = missing_connections.pop(randint(0, len(missing_connections)))
+            a, b = missing_connections.pop(randint(0, len(missing_connections)-1))
             edge = Edge(randint(0, weight_max))
             self.edges.append(edge)
             a.connect_to(b, edge)
