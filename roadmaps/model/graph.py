@@ -1,19 +1,32 @@
 
+import abc
+
 """Contains the base Edge, Node, and Graph classes"""
 
-class Edge:
+class Traversable(abc.ABC):
+
+    @abc.abstractmethod
+    def traverse(self, t: int):
+        """Returns how long it will take to traverse this object, given the current time t"""
+        pass
+
+class Edge(Traversable):
 
     def __init__(self, weight=1):
         self.weight = weight
 
-    def get_weight(self):
+    def traverse(self, t):
         return self.weight
 
 
-class Node:
+class Node(Traversable):
 
     def __init__(self):
         self.neighbors = {} # self.neighbors is a dictionary mapping {neighbor: edge}
+        self.parents = {} # self.parents is a dictionary mapping {parent: edge}
+
+    def traverse(self, t):
+        return 0
 
     def get_neighbors(self) -> list:
         """Returns a list of nodes that are directly accessible from this node"""
@@ -23,13 +36,22 @@ class Node:
         """Returns a list of edges that are directly accessible from this node"""
         return list(self.neighbors.values())
 
-    def get_cost(self, node):
-        """Returns the weight of the edge connecting `self` to `node`"""
-        return self.neighbors[node].get_weight()
+    def get_parents(self):
+        """Returns a list of nodes that directly connect to this node"""
+        return list(self.parents.keys())
+
+    def get_input_edges(self):
+        """Returns a list of edges that directly connect to this node"""
+        return list(self.parents.values()) 
+
+    def get_edge(self, node):
+        """Returns the edge connecting `self` to `node`"""
+        return self.neighbors[node]
 
     def connect_to(self, node, edge: Edge):
         """Creates a new connection or replaces an existing one from `self` to `node` using `edge`"""
         self.neighbors[node] = edge
+        node.parents[self] = edge
 
 
 class Graph:
@@ -38,6 +60,7 @@ class Graph:
         self.nodes = nodes
 
         self.computed_paths = {}    # This dictionary maps pairs of nodes to the path between them if it was computed previously
+        # TODO: hash code for nodes to verify most up-to-date computed paths
 
     def get_nodes(self) -> list:
         return self.nodes
@@ -46,7 +69,9 @@ class Graph:
         return list({edge : None for node in self.nodes for edge in node.get_edges()}.keys())   
 
     def get_path(self, start: Node, end: Node) -> list:
-        """Returns a list of nodes that constitute the optimal path from `start` to `end`. Returns None if a path does not exist. """
+        """Returns a list of nodes that constitute the optimal path from `start` to `end`.
+           Path is optimal with regard to the traversal times of all nodes and edges in the path. 
+           Returns None if a path does not exist. """
         
         if (start, end) in self.computed_paths.keys():
             return self.computed_paths[(start, end)]
@@ -68,10 +93,10 @@ class Graph:
                 return path
 
             else: # Insert new frontier nodes
-                neighbors = [x for x in node.get_neighbors() if x not in closed_nodes]
+                neighbors = [x for x in list(set(node.get_neighbors()) - set(closed_nodes))]
                 for neighbor in neighbors:
                     parent_map[neighbor] = node
-                    neighbor_score = cost + node.get_cost(neighbor)
+                    neighbor_score = cost + node.traverse(cost) + node.get_edge(neighbor).traverse(node.traverse(cost))
 
                     # Insert in sorted order - binary search to find insert index
                     i, j = 0, max(0, len(frontier_nodes) - 1)
