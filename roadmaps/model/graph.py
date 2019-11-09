@@ -1,5 +1,5 @@
 
-"""Represents a base network module"""
+"""Contains the base Edge, Node, and Graph classes"""
 
 class Edge:
 
@@ -15,9 +15,13 @@ class Node:
     def __init__(self):
         self.neighbors = {} # self.neighbors is a dictionary mapping {neighbor: edge}
 
-    def get_neighbors(self):
+    def get_neighbors(self) -> list:
         """Returns a list of nodes that are directly accessible from this node"""
-        return self.neighbors.keys()
+        return list(self.neighbors.keys())
+
+    def get_edges(self) -> list:
+        """Returns a list of edges that are directly accessible from this node"""
+        return list(self.neighbors.values())
 
     def get_cost(self, node):
         """Returns the weight of the edge connecting `self` to `node`"""
@@ -37,6 +41,9 @@ class Graph:
 
     def get_nodes(self) -> list:
         return self.nodes
+
+    def get_edges(self) -> list:
+        return list({edge : None for node in self.nodes for edge in node.get_edges()}.keys())   
 
     def get_path(self, start: Node, end: Node) -> list:
         """Returns a list of nodes that constitute the optimal path from `start` to `end`. Returns None if a path does not exist. """
@@ -84,4 +91,6 @@ class Graph:
         return None
 
     def connect(self, start: Node, end: Node, edge: Edge):
+        """Connects `edge` from `start` to `edge`"""
+        self.nodes = list(set(self.nodes + [start, end]))
         return start.connect_to(end, edge)

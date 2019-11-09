@@ -1,7 +1,7 @@
 
 from random import choice, randint, uniform
 
-from network.planar import PlanarNode, PlanarGraph
+from model.planar import PlanarNode, PlanarGraph
 
 #if __name__ == '__main__':
 def getPlanarGraph():
