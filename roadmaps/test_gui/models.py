@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class RoadMap:
     def __init__(self,
@@ -14,12 +15,16 @@ class RoadMap:
 
     def step(self, dt):
         self.time_elapsed += dt
+        print(self.state)[0, 0]
         self.state[:, :2] += dt * self.state[:, 2:]
 
         crossed_x1 = (self.state[:, 0] < self.bounds[0] + self.size)
         crossed_x2 = (self.state[:, 0] > self.bounds[1] - self.size)
         crossed_y1 = (self.state[:, 1] < self.bounds[2] + self.size)
         crossed_y2 = (self.state[:, 1] > self.bounds[3] - self.size)
+
+        right_before_light = (self.state[:, 0] % 1 > 0.9)
+        self.state[right_before_light, 2] = 0
 
         negative_x = (self.state[:, 0] < 0)
         positive_x = (self.state[:, 0] > 0)
