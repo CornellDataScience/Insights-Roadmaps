@@ -2,7 +2,6 @@
 import unittest
 
 from random import choice, randint
-from time import time_ns as now
 
 from model.graph import Edge, Node, Graph
 
