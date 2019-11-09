@@ -4,14 +4,20 @@ from .network import TrafficEdge, TrafficNode, TrafficNetwork
 
 class Intersection(TrafficNode):
 
-    def __init__(self, edge_mapping):
+    def __init__(self):
         super().__init__()
         
         self.paths = {} # self.paths maps parent nodes to a set-like list of valid neighbor nodes if their paths are connected internally by the intersection
 
+    def map_all_nodes(self):
+        """Creates an internal path between all parent and neighbor nodes"""
+        self.paths = {}
+        for parent in self.get_parents():
+            self.path[parent] = super().get_neighbors()
+
     def map_nodes(self, parent: TrafficNode, neighbor: TrafficNode):
         """Create an internal path from the input node `parent` to the output node `neighbor`"""
-        if neighbor in super().get_neighbors() and parent in super().get_parents():
+        if neighbor in super().get_neighbors() and parent in self.get_parents():
             if parent in self.paths.keys():
                 if neighbor not in self.paths[parent]: self.paths[parent].append(neighbor)
             else:
