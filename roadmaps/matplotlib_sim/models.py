@@ -11,6 +11,8 @@ class RoadMap:
         self.state = self.init_state.copy()
         self.time_elapsed = 0
         self.bounds = bounds
+        self.ncolor = 'g'
+        self.counter = 0
 
     def step(self, dt):
         self.time_elapsed += dt
@@ -42,4 +44,22 @@ class RoadMap:
         self.state[crossed_x1 | crossed_x2, 2] *= -1
         self.state[crossed_y1 | crossed_y2, 3] *= -1
 
-        
+        #change color of traffic lights
+        red_duration = 5
+        green_duration = 10
+
+        self.time_elapsed += dt
+        self.counter +=dt
+
+        if self.counter <=green_duration and self.ncolor == 'g':
+            self.ncolor = 'g'
+        elif self.counter <=red_duration and self.ncolor == 'r':
+            self.ncolor = 'r'
+        elif self.counter>green_duration and self.ncolor == 'g':
+            self.ncolor = 'r'
+            self.counter = 0
+        elif self.counter>red_duration and self.ncolor == 'r':
+            self.ncolor = 'g'
+            self.counter = 0
+
+        #print(self.ncolor)
