@@ -12,7 +12,7 @@ class Simulation(object):
 		self.max_time = max_time
 		self.env = simpy.Environment()
 		self.graph = graph
-		self.cars = [Vehicle(self.env, deque(graph.get_path(sources[i], destinations[i]))) for i in range(num_cars)]
+		self.cars = [Vehicle(self.env, deque(graph.get_path(sources[i], destinations[i])), i) for i in range(num_cars)]
 
 
 	def start(self):

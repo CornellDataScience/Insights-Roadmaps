@@ -1,4 +1,4 @@
-
+import random
 import abc
 
 """Contains the base Edge, Node, and Graph classes"""
@@ -26,7 +26,7 @@ class Node(Traversable):
         self.parents = {} # self.parents is a dictionary mapping {parent: edge}
 
     def traverse(self, t):
-        return 0
+        return random.randint(0, 3)
 
     def get_neighbors(self) -> list:
         """Returns a list of nodes that are directly accessible from this node"""
