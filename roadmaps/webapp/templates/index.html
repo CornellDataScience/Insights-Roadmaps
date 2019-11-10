@@ -38,6 +38,11 @@
         var weights = dict.car1weights;
         var markers = []
         var image = "https://i.imgur.com/SZgQKcB.png";
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+          scale: 8,
+          strokeColor: '#393'
+        };
         for(i = 0; i < locations.length; i++){
           markers.push(new google.maps.Marker({
              position: locations[i],
@@ -50,7 +55,11 @@
           lines.push(new google.maps.Polyline({
             path: [edges[j*2], edges[j*2+1]],
             strokeColor: pickHex([255, 0, 0], [0, 0, 0], weights[j]),//[{lat: 42.436483, lng: -76.507386}, {lat: 42.438501, lng: -76.464116}, {lat: 42.447367, lng: -76.470143}],
-            map: map
+            map: map,
+            icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }]
           }));
         }
         for (k = 0; k < lines.length; k++) {
@@ -76,21 +85,10 @@
          //marker.color = old_color;
       });
       }
-        /*var lineSymbol = {
-          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-          scale: 8,
-          strokeColor: '#393'
-        };
-        var line = new google.maps.Polyline({
-          path: [{lat: 42.440498, lng: -76.495697}, {lat: 42.442137, lng: -76.485450}, {lat: 42.442138, lng: -76.485450}],
-          icons: [{
-            icon: lineSymbol,
-            offset: '100%'
-          }],
-          map: map
-        });*/
 
-        //animateCircle(line);
+        for (m = 0; m < lines.length; m++) {
+          animateCircle(lines[k]);
+        }
       }
 
       function animateCircle(line) {

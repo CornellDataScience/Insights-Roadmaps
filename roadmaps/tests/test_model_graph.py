@@ -88,6 +88,19 @@ class TestGraph(unittest.TestCase):
     def test_get_edges(self):
         self.assertEqual(set(self.edges), set(self.graph.get_edges()))
 
+    def test_get_reachable_nodes(self):
+        source = choice(self.graph.get_nodes())
+        reachable = self.graph.get_reachable_nodes(source)
+        unreachable = list(set(self.graph.get_nodes()) - set(reachable))
+
+        if len(reachable) > 0:
+            for n in reachable:
+                self.assertIsNotNone(self.graph.get_path(source, n), 'unreachable node returned by Graph.get_reachable_nodes()')
+
+        if len(unreachable) > 0:
+            for n in unreachable:
+                self.assertIsNone(self.graph.get_path(source, n), 'reachable node not returned by Graph.get_reachable_nodes()')
+
     def test_connect(self):
         graph = Graph()
         self.assertEqual([], graph.get_nodes())
