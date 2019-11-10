@@ -1,3 +1,6 @@
+main:
+	python -m roadmaps
+
 app:
 	python -m roadmaps.webapp
 
