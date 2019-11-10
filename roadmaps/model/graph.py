@@ -6,8 +6,8 @@ import abc
 class Traversable(abc.ABC):
 
     @abc.abstractmethod
-    def traverse(self, t: int):
-        """Returns how long it will take to traverse this object, given the current time t"""
+    def traverse(self, t: int) -> int:
+        """Returns how long it will take to traverse this object, given the current time `t`"""
         pass
 
 class Edge(Traversable):
@@ -60,18 +60,20 @@ class Graph:
         self.nodes = nodes
 
         self.computed_paths = {}    # This dictionary maps pairs of nodes to the path between them if it was computed previously
+        self.connected_nodes = {}   # This dictionary maps nodes to a list of nodes they are connected to if it was computed previously
         # TODO: hash code for nodes to verify most up-to-date computed paths
 
     def get_nodes(self) -> list:
         return self.nodes
 
     def get_edges(self) -> list:
-        return list({edge : None for node in self.nodes for edge in node.get_edges()}.keys())   
+        return list({edge : None for node in self.nodes for edge in node.get_edges()}.keys())
 
     def get_path(self, start: Node, end: Node) -> list:
         """Returns a list of nodes that constitute the optimal path from `start` to `end`.
            Path is optimal with regard to the traversal times of all nodes and edges in the path. 
-           Returns None if a path does not exist. """
+           Returns None if a path does not exist.
+           TODO: Caches all paths less than the length of the longest computed path so that they don't have to be calculated again. """
         
         if (start, end) in self.computed_paths.keys():
             return self.computed_paths[(start, end)]
@@ -114,6 +116,10 @@ class Graph:
                     frontier_nodes.insert(i, (neighbor, neighbor_score))
 
         return None
+
+    def get_reachable_nodes(self, source: Node):
+        """Returns a list of nodes that `source` is connected to."""
+        pass
 
     def connect(self, start: Node, end: Node, edge: Edge):
         """Connects `edge` from `start` to `edge`"""
