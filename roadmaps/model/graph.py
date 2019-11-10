@@ -119,7 +119,18 @@ class Graph:
 
     def get_reachable_nodes(self, source: Node):
         """Returns a list of nodes that `source` is connected to."""
-        pass
+        frontier_nodes = [source]   # stores a list of tuples of frontier nodes and their cost in the form (node, cost) sorted by cost
+        closed_nodes = []           # stores a list of explored nodes
+
+        while len(frontier_nodes) > 0:
+            node = frontier_nodes.pop()
+            closed_nodes.append(node)
+
+            for neighbor in node.get_neighbors():
+                if neighbor not in closed_nodes and neighbor not in frontier_nodes:
+                    frontier_nodes.append(neighbor)
+            
+        return closed_nodes
 
     def connect(self, start: Node, end: Node, edge: Edge):
         """Connects `edge` from `start` to `edge`"""

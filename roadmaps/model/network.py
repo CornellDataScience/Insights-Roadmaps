@@ -27,8 +27,8 @@ class TrafficNode(Node):
         super().__init__()
 
 
-    def traverse(self, t: int, parent: Node) -> int:
-        """Returns how long it will take to traverse this object, given the current time `t` and the node coming from `parent`"""
+    def traverse(self, t: int, parent) -> int:
+        """Returns how long it will take to traverse this object, given the current time `t` and the previous node `parent`"""
         return 0
 
     def connect_to(self, node, edge: TrafficEdge):
