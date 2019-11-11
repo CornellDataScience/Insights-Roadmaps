@@ -61,7 +61,7 @@ class Graph:
 
         self.computed_paths = {}    # This dictionary maps pairs of nodes to the path between them if it was computed previously
         self.connected_nodes = {}   # This dictionary maps nodes to a list of nodes they are connected to if it was computed previously
-        # TODO: hash code for nodes to verify most up-to-date computed paths
+        # TODO: hash code for nodes to verify most up-to-date computed paths and connected_nodes
 
     def get_nodes(self) -> list:
         return self.nodes
@@ -73,7 +73,7 @@ class Graph:
         """Returns a list of nodes that constitute the optimal path from `start` to `end`.
            Path is optimal with regard to the traversal times of all nodes and edges in the path. 
            Returns None if a path does not exist.
-           TODO: Caches all paths less than the length of the longest computed path so that they don't have to be calculated again. """
+           Caches calculated paths so they don't have to be recalculated again."""
         
         if (start, end) in self.computed_paths.keys():
             return self.computed_paths[(start, end)]
@@ -118,7 +118,11 @@ class Graph:
         return None
 
     def get_reachable_nodes(self, source: Node):
-        """Returns a list of nodes that `source` is connected to."""
+        """Returns a list of nodes that `source` is connected to.
+           Caches calculated connected nodes so they don't have to be recalculated again."""
+        if source in self.connected_nodes.keys():
+            return self.connected_nodes[source]
+
         frontier_nodes = [source]   # stores a list of tuples of frontier nodes and their cost in the form (node, cost) sorted by cost
         closed_nodes = []           # stores a list of explored nodes
 
@@ -130,6 +134,7 @@ class Graph:
                 if neighbor not in closed_nodes and neighbor not in frontier_nodes:
                     frontier_nodes.append(neighbor)
             
+        self.connected_nodes[source] = closed_nodes
         return closed_nodes
 
     def connect(self, start: Node, end: Node, edge: Edge):
