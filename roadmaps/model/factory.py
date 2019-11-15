@@ -1,9 +1,11 @@
 
 from random import randint, choice
 from .graph import Edge, Node, Graph
+from .network import TrafficEdge, TrafficNode, Network
+from .intersections import TrafficLight
 
 def random_graph(n: int, v: int, max_edge_weight: int = 10, directed: bool = True) -> Graph:
-    """Generates a random graph with n nodes and at most v edges"""
+    """Generates a random graph with `n` nodes and at most `v` edges"""
 
     # Build connected nodes
     nodes = [Node()]
@@ -28,6 +30,35 @@ def random_graph(n: int, v: int, max_edge_weight: int = 10, directed: bool = Tru
 
     # Return the graph
     return Graph(nodes)
+
+
+def random_network(n: int, v: int, max_edge_weight: int = 10, directed: bool = True) -> Graph:
+    """Generates a random network with `n` nodes and at most `v` edges"""
+
+    # Build connected nodes
+    nodes = [TrafficNode()]
+    for _ in range(n - 1):
+        new = TrafficNode() if randint(0, 1) == 0 else TrafficLight()   # Generates traffic light with 0.5 probability
+        nodes.append(new)
+        old = choice(nodes)
+
+        weight = randint(0, max_edge_weight) 
+        old.connect_to(new, TrafficEdge(weight))
+        if not directed:
+            new.connect_to(old, TrafficEdge(weight))
+    
+    # Add random connections
+    missing_connections = [(n1, n2) for n1 in nodes for n2 in list(set(nodes) - set(n1.get_neighbors()))]
+    for i in range(v - (n - 1)):
+        a, b = missing_connections.pop(randint(0, len(missing_connections)-1))
+        weight = randint(0, max_edge_weight) 
+        a.connect_to(b, TrafficEdge(weight))
+        if not directed:
+            b.connect_to(a, TrafficEdge(weight))
+
+    # Return the graph
+    return Network(nodes)
+
 
 # TODO: make better... MUCH better (dont use this method except for webapp)
 def planar_graph():
