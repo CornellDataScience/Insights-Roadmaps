@@ -24,7 +24,7 @@ class TrafficLight(TrafficNode):
             t -= self.time_sequence[i]
         
         idle_time = 0
-        while (behind, ahead) not in path_sequence[i]:
+        while (behind, ahead) not in self.path_sequence[i]:
             i = (i + 1) % len(self.path_sequence)
             idle_time += self.time_sequence[i]
 
