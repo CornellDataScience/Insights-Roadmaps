@@ -25,9 +25,13 @@ for i in range(-10, 11, 2):
 
 
 # Draw the lights
+lights = []
 for j in range(-10, 11, 2):
   x_range = list(range(-10, 11, 2))
-  ax.scatter(x_range, [j]*len(x_range), color='g')
+  if j == 4 or j == 2:
+    lights.append(ax.scatter(x_range, [j]*len(x_range), color='red'))
+  else:
+    lights.append(ax.scatter(x_range, [j]*len(x_range), color='g'))
 
 
 
@@ -50,7 +54,7 @@ def init():
     return cars, rect
 
 def animate(i):
-    global city, rect, dt, ax, fig
+    global city, rect, dt, ax, fig, lights
     city.step(dt)
 
     rect.set_edgecolor('k')
