@@ -1,8 +1,9 @@
 
-from random import randint, choice
+from random import randint, choice, uniform
 from .graph import Edge, Node, Graph
 from .network import TrafficEdge, TrafficNode, Network
 from .intersections import TrafficLight
+from .planar import PlanarNode, PlanarGraph
 
 def random_graph(n: int, v: int, max_edge_weight: int = 10, directed: bool = True) -> Graph:
     """Generates a random graph with `n` nodes and at most `v` edges"""

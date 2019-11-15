@@ -21,13 +21,7 @@ def getPlanarGraphAsDict():
         for neighbor_node in neighbors:
             dict['edges'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
             dict['edges'].append({'lat': neighbor_node.coordinates[0], 'lng': neighbor_node.coordinates[1]})
-            dict['weights'].append(node.get_cost(neighbor_node))
-    g = random_graph(30, 300)
-    MAX_TIME = 10000
-    s = Simulation(15, g.get_nodes()[:15], g.get_nodes()[-15:], g, MAX_TIME)
-    s.start()
-    dict['cars'] = s.run_webapp()
-    #TODO: figure out way to get car path
+            dict['weights'].append(node.get_edge(neighbor_node).traverse(0))
     return dict
 
 #ogging.basicConfig(level=logging.DEBUG)
