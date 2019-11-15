@@ -1,5 +1,8 @@
+main:
+	python -m roadmaps
+
 app:
-	python roadmaps/webapp.py
+	python -m roadmaps.webapp
 
 test:
 	python -m unittest discover -t roadmaps -s roadmaps/tests

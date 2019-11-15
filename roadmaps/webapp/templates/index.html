@@ -33,9 +33,9 @@
           zoom: 15,
         });
         var dict = JSON.parse('{{ cars | tojson | safe}}');
-        var locations = dict.car1;
-        var edges = dict.car1edges;
-        var weights = dict.car1weights;
+        var locations = dict.nodes;
+        var edges = dict.edges;
+        var weights = dict.weights;
         var markers = []
         var image = "https://i.imgur.com/SZgQKcB.png";
         var lineSymbol = {
@@ -85,7 +85,6 @@
          //marker.color = old_color;
       });
       }
-
         for (m = 0; m < lines.length; m++) {
           animateCircle(lines[m]);
         }
@@ -101,6 +100,8 @@
             line.set('icons', icons);
         }, 30);
       }
+      //TODO: update offset in intervals
+      //every one second, move icon to next position in path  
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO9i0th8z6KtfcRIiIU0VGExwNShdUx6Q&callback=initMap">
