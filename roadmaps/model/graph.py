@@ -98,7 +98,7 @@ class Graph:
                 neighbors = [x for x in list(set(node.get_neighbors()) - set(closed_nodes))]
                 for neighbor in neighbors:
                     parent_map[neighbor] = node
-                    neighbor_score = cost + node.traverse(cost) + node.get_edge(neighbor).traverse(node.traverse(cost))
+                    neighbor_score = cost + node.traverse(cost) + node.get_edge(neighbor).traverse(cost + node.traverse(cost))
 
                     # Insert in sorted order - binary search to find insert index
                     i, j = 0, max(0, len(frontier_nodes) - 1)

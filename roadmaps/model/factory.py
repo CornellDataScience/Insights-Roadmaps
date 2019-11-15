@@ -39,6 +39,7 @@ def random_network(n: int, v: int, max_edge_weight: int = 10, directed: bool = T
     nodes = [TrafficNode()]
     for _ in range(n - 1):
         new = TrafficNode() if randint(0, 1) == 0 else TrafficLight()   # Generates traffic light with 0.5 probability
+        new.map_all_paths()
         nodes.append(new)
         old = choice(nodes)
 

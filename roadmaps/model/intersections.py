@@ -2,42 +2,31 @@
 from .graph import Edge, Node, Graph
 from .network import TrafficEdge, TrafficNode, TrafficNetwork
 
-class Intersection(Node):
+class TrafficLight(TrafficNode):
 
     def __init__(self):
         super().__init__()
-        self.paths = {} # self.paths maps parent nodes to a set-like list of valid neighbor nodes if their paths are connected internally by the intersection
 
-    def get_neighbors(self, input_node):
-        """Returns a list of nodes that are directly accessible from this node when coming from the node `input_node`"""
-        return self.paths[input_node]
+        # Traffic lights are implemented by a sequence of sets of paths that can be 'active' together.
+        # Active paths allow immediate traversal (green) while inactive paths stop traversal (red).
+        # The set of paths that are 'active' cycles through a sequence defined by self.path_sequence
+        # The time that a set of paths is 'active' is given by the parallel list self.
+        # Representation Invariant: self.path_sequence and self.time_sequence must be the same length
+        self.path_sequence = [] # list of list of tuple of TrafficNode objects ... I know right
+        self.time_sequence = []
 
-    def get_edges(self, input_node):
-        """Returns a list of edges that are directly accessible from this node when coming from the node `input_node`"""
-        return [self.neighbors[node] for node in self.paths[input_node]]
+    def traverse(self, t, behind: TrafficNode, ahead: TrafficNode):
+        t %= sum(self.time_sequence) # t will be at least 0
 
-    def map_all_nodes(self):
-        """Creates an internal path between all parent and neighbor nodes"""
-        self.paths = {}
-        for parent in self.get_parents():
-            self.path[parent] = super().get_neighbors()
+        i = -1 # i is the index of the current position in the sequence
+        while t >= 0:
+            i = (i + 1) % len(self.path_sequence)
+            t -= self.time_sequence[i]
+        
+        idle_time = 0
+        while (behind, ahead) not in path_sequence[i]:
+            i = (i + 1) % len(self.path_sequence)
+            idle_time += self.time_sequence[i]
 
-    def map_nodes(self, parent: TrafficNode, neighbor: TrafficNode):
-        """Creates an internal path from the input node `parent` to the output node `neighbor`"""
-        if neighbor in super().get_neighbors() and parent in self.get_parents():
-            if parent in self.paths.keys():
-                if neighbor not in self.paths[parent]: self.paths[parent].append(neighbor)
-            else:
-                self.paths[parent] = [neighbor]
-
-
-class TrafficLight(Intersection):
-
-    def __init__(self):
-        super().__init__()
-        self.sequence = [[()],[]] # self.sequence is a list of lists of pairs that represent paths from (parent, neighbor)
-
-    def traverse(self, t):
-        #TODO: redefine
-        pass
+        return idle_time
     
