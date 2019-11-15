@@ -1,6 +1,6 @@
 
 from .graph import Edge, Node, Graph
-from .network import TrafficEdge, TrafficNode
+from .network import TrafficEdge, TrafficNode, Network
 
 class TrafficLight(TrafficNode):
 

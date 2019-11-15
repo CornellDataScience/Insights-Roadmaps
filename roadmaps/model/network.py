@@ -51,7 +51,7 @@ class TrafficNode(Node):
         for parent in self.get_parents():
             self.path[parent] = super().get_neighbors()
 
-    def map_path(self, parent, neighbor):
+    def map_path(self, parent: Node, neighbor: Node):
         """Creates an internal path from the input node `parent` to the output node `neighbor`"""
         if neighbor in super().get_neighbors() and parent in self.get_parents():
             if parent in self.paths.keys():
