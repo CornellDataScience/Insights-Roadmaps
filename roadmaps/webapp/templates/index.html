@@ -21,7 +21,7 @@
     setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
     console.log("reached");
       function pickHex(color1, color2, weight) {
-        var w1 = weight*100; // this is some crappy normalization
+        var w1 = weight/10; // this is some crappy normalization
         var w2 = 1 - w1;
         var rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
             Math.round(color1[1] * w1 + color2[1] * w2),
@@ -70,7 +70,7 @@
 
         function setWeight(marker, secretMessage) {
         var infoWindow = new google.maps.InfoWindow({
-          content: secretMessage.toString()
+          content: "Weight: " + secretMessage.toString()
         });
         var oldWeight = marker.strokeWeight;
 
@@ -88,7 +88,7 @@
       });
       }
         for (m = 0; m < lines.length; m++) {
-          animateCircle(lines[m]);
+          animateCircle(lines[m], 15 + Math.floor(Math.random() * Math.floor(20)));
         }
       }
 
@@ -100,7 +100,7 @@
             var icons = line.get('icons');
             icons[0].offset = (count / 2) + '%';
             line.set('icons', icons);
-        }, 30);
+        }, speed);
       }
       //TODO: update offset in intervals
       //every one second, move icon to next position in path

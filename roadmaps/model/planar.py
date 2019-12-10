@@ -2,13 +2,14 @@ from .graph import Edge, Node, Graph
 
 import math
 import sys
+import random
 
 class PlanarEdge(Edge):
 
     def __init__(self, start_coordinates: tuple, end_coordinates: tuple):
         self.start = start_coordinates
         self.end = end_coordinates
-        self.weight = math.sqrt((self.end[0] - self.start[0])**2 + (self.end[1] - self.start[1])**2)
+        self.weight = random.randint(0, 10)#math.sqrt((self.end[0] - self.start[0])**2 + (self.end[1] - self.start[1])**2)
 
     def get_weight(self):
 
