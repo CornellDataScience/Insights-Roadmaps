@@ -13,14 +13,13 @@ from model.planar import PlanarEdge
 
 def getPlanarGraphAsDict():
     planarGraphResult = planar_graph()
+    temp = [[40.752127, -73.993497], [40.752851, -73.993037], [40.753479, -73.992542], [40.754071, -73.992088], [40.754703, -73.991640], [40.755332, -73.991189], [40.754123, -73.988374], [40.753530, -73.988830], [40.752929, -73.989262], [40.752162, -73.987534], [40.751439, -73.987723], [40.750701, -73.987846]]
     dict = {'nodes': [], 'edges': [], 'weights': []}
-    for node in planarGraphResult.nodes:
-        dict['nodes'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
-        neighbors = node.get_neighbors()
-        for neighbor_node in neighbors:
-            dict['edges'].append({'lat': node.coordinates[0], 'lng': node.coordinates[1]})
-            dict['edges'].append({'lat': neighbor_node.coordinates[0], 'lng': neighbor_node.coordinates[1]})
-            dict['weights'].append(PlanarEdge(node.coordinates, neighbor_node.coordinates).get_weight())
+    for i in range(len(temp) - 1):
+        dict['nodes'].append({'lat': temp[i][0], 'lng': temp[i][1]})
+        dict['edges'].append({'lat': temp[i][0], 'lng': temp[i][1]})
+        dict['edges'].append({'lat': temp[i+1][0], 'lng': temp[i+1][1]})
+        dict['weights'].append(PlanarEdge(temp[i], temp[i+1]).get_weight())
     #MAX_TIME = 10000
     #s = Simulation(15, g.get_nodes()[:15], g.get_nodes()[-15:], g, MAX_TIME)
     #s.start()
