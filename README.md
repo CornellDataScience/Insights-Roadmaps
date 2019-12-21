@@ -33,7 +33,7 @@ In order to keep track of what is going on in our traffic system, we simulate th
 - Monitor
 
 It is worth noting that we made a few important assumptions here. First, Each vehicle instance moves at constant speed along a predefined path. Second, all traffic lights switch between green lights and red lights. Cars entering an intersection stop immediately and join a queue (if any) when the traffic light is red and cross the intersection when the light is green. The monitor collects key process statistics, which are used to calculate higher-level performance indexes such as:
-- Average waiting time of all cars, 
+- Average waiting time of all cars
 - Travel time of each car
 - Total travel time of all cars
 - Traffic density of each road section
@@ -45,9 +45,6 @@ It is worth noting that we made a few important assumptions here. First, Each ve
 We created a preliminary visualization of a simplified traffic network using Matplotlib to serve as the basis for a larger and more interactive visualization overlaid on real traffic networks with Google Maps API. In our initial visualization, we display roads as edges and intersections as nodes in a grid-like fashion to visualize traffic flow in a simplified virtual network model. With this visualization, we can identify some useful features in our network including the position, velocity, and waiting time of individual cars and traffic light patterns. a paragraph about matplotlib vis.
 
 Next, we moved on to visualizing our model and simulation by overlaying our network on a real-world map using Google Maps Javascript API. We use repeated window calls to animate vehicles in the network and permit the input of either non-grid or grid-like networks, allowing for realistic illustration and easy overlay over real cities with OpenStreetMap API. With this visualization, we can picture a virtual city, examine how cars move, and picture insights from our simulation analysis using different node images, edge colors, and car types. Node images represent type of intersection and we use different pictures to represent different types of roads. We color our edges to represent the congestion of a road, which is based on our simulation analysis -- the more red the line is, the more congested the road (weight represents number of cars currently on road). In the spirit of interactivity, we allow the user to hover over edges to gain useful insights into network features from our simulation analysis. We also utilize different car pictures to represent type of cars and show them going at speeds according to our simulation statistics.
-
-### Lessons Learned
-
 
 ### What's Next?
 
