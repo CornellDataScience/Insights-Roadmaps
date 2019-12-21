@@ -13,8 +13,23 @@ Our next task is to identify bottlenecks and stresses in the network from our si
 ##### Optimizing Traffic Networks
 Our ultimate task is to use the generated analysis reports to train supervised machine learning models to identify optimal networks. Optimal here may refer to a few things, such as minimized traffic density, traveling time, or even probability of an accident. We may even want to optimize a network within a certain constraint, such as a budget. Thus we will create various evaluation functions to quantify the properties we want to optimize, and use the data collected by our simulations to train our models. We want to use these models to suggest changes to a given traffic network that will improve some aspect of it. These changes may be minimal, like changing traffic light timings, or they may be drastic, like adding a new superhighway through the middle of the network. Whatever the case, these suggestions will be backed by simulations confirming their plausibility and could offer new insights into how to design an efficient and optimal traffic network for future projects.
 
-### Progress
 
+### Progress
+In our first semester working on this project, we successfully completed the first half of the pipeline. That includes building the model for the networks and a system to run simulations on top of it. We also built two visualizations to demonstrate how the simulation runs and the what analytics it produces.
+
+##### Model
+The model is our underlying representation of traffic networks. We had two goals in mind when designing our model - scalability and extensibility. We wanted our model to be scalable, in the sense that it should not be difficult to represent very large traffic networks the size of real cities once we could get it working for smaller networks. We also wanted it to be extensible, in the sense that it should be easy to add more features to the network representation to continually make it more realistic without breaking the rest of the pipeline.
+
+Ultimately, we built our model using a graph...
+todo
+
+##### Simulation
+todo
+
+##### Visualizations
+a paragraph about google maps vis
+
+a paragraph about matplotlib vis
 
 ### Lessons Learned
 
