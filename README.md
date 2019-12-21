@@ -42,12 +42,15 @@ It is worth noting that we made a few important assumptions here. First, Each ve
 - Number of accidents observed
 
 After the simulation is set up, we were able to collect data on the locations of cars at each time stamp and print out discrete events happening in the system. In order to measure the performance of the system, we came up with evaluation functions measuring various properties of the network. Subsequently, we designed and ran experiments to analyze the effect of independent decision variables (e.g. length of traffic light intervals) on the optimality of the system. More concretely, we ran 30 simulations with 500 cars following predefined paths on a graph with 100 nodes and 200 edges. Below are 4 system statistics we obtained:
+
 |        | 20-second intervals | 40-second intervals|
-| ------------- |:-------------:| -----:|
+|-----|--------------------|------------------|
 | Average travel time      | 336.5 | 398.1 |
 | Average length of queues at intersections      | 1.2     | 2.7 |
 | Average density of roads | 0.00184    | 0.00203 |
 | Total number of accidents | 5 | 3 |
+
+Considering each trial as an individual sample, we assumed that the distribution of these metrics were approximately normal (because sampling distribution of the sample mean is approximately normal). Therefore, we chose to use a T-test to test whether the difference we observed between the two columns was statistically significant. With a p-value of 0.05 and mean and standard deviation calculated from the 30 trials, we were able to conclude that there was enough evidence to reject the null hypothesis that the two numbers were from the same distribution, for all 4 metrics. In other words, we concluded that 20-second intervals tend to result in more efficient but less safe traffic systems. This analysis served as a sanity check demonstrating that traffic light interval was a promising area for optimization, which sets the foundation for the optimization phase of this project in the future.
 
 
 ##### Visualizations
